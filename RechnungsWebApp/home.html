@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiwilabs Rechnungs-WebApp</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="w3.css">
+
+    <script src="angular.min.js"></script>
+
+</head>
+<body ng-app="invoiceApp" ng-controller="myCtrl">
+
+<div class="w3-container w3-green">
+
+    <h3 style="margin-top:1em">Kiwilabs Rechnungs-WebApp</h3>
+
+</div>
+
+<div  class="w3-card">
+
+    <div class="w3-container w3-light-grey w3-section">
+        <h3>Angaben zum Rechnungssteller</h3>
+        <label class="w3-text-black"><b>Name</b></label>
+        <input ng-click="toggleSenderList()" ng-model="senderName" class="w3-input w3-border" id="senderName" name="senderName" type="text"></p>
+
+        <div ng-show="showSenderList">
+            <ul class="w3-ul w3-hoverable">
+                <li ng-repeat="x in myData" ng-click="chooseSender(x)">
+                    {{ x.FirstName + ' ' + x.LastName }}
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+
+<div  class="w3-card">
+
+    <div class="w3-container w3-light-grey w3-section">
+
+        <div>
+            <h3>Angaben zum Rechnungsempfänger</h3>
+            <label class="w3-text-black"><b>Firmenname</b></label>
+            <input ng-focus="showCustomerList = true" ng-model="customerCompany" class="w3-input w3-border" id="customerCompany" name="customerCompany" type="text">
+
+            <div ng-show="showCustomerList">
+                <ul class="w3-ul w3-hoverable">
+                    <li ng-repeat="c in myCustomers  | limitTo:5 | filter : customerCompany | orderBy:'customerCompany' " ng-click="chooseCustomer(c)">
+                        {{ c.customerCompany }}
+                    </li>
+                </ul>
+            </div>
+
+            <p>
+                <label class="w3-text-black"><b>Kundenname</b></label>
+                <input ng-model="customerName" class="w3-input w3-border" id="customerName" name="customerName" type="text"></p>
+            <p>
+                <label class="w3-text-black"><b>Straße</b></label>
+                <input ng-model="customerStreet" class="w3-input w3-border" id="customerStreet" name="customerStreet" type="text"></p>
+        </div>
+
+
+        <div class="w3-row">
+
+            <div class="w3-col m1 w3-hide-small"> <p> </div>
+
+            <div class="w3-col m3">
+                <label class="w3-text-black"><b>Postleitzahl</b></label>
+                <input ng-model="customerZIP" class="w3-input w3-border" id="customerZIP" name="customerZIP" type="text"></p>
+            </div>
+
+            <div class="w3-col m1 w3-hide-small"> <p> </div>
+
+            <div class="w3-col m6">
+                <label class="w3-text-black"><b>Stadt</b></label>
+                <input ng-model="customerCity" class="w3-input w3-border" id="customerCity" name="customerCity" type="text"></p>
+            </div>
+
+            <div class="w3-col m1 w3-hide-small"> <p> </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-card">
+
+    <div class="w3-container w3-light-grey w3-section">
+
+        <div>
+            <h3>Rechnungspositionen</h3>
+            <label class="w3-text-black"><b>Bezeichnung</b></label>
+            <input ng-model="positionDescription" class="w3-input w3-border" id="positionDescription" name="positionDescription" type="text"></p>
+        </div>
+
+        <div class="w3-row">
+
+
+            <div class="w3-col m3">
+                <label class="w3-text-black"><b>Menge</b></label>
+                <input ng-model="amount" class="w3-input w3-border" id="amount" name="amount" type="number"></p>
+            </div>
+
+            <div class="w3-col m1 w3-hide-small">
+                <p></p>
+            </div>
+
+
+            <div class="w3-col m3">
+                <label class="w3-text-black"><b>Einzelpreis</b></label>
+                <div class="w3-cell">
+                    <input ng-model="unitCostEUR" class="w3-input w3-border w3-right-align" id="unitCostEUR" name="unitCostEUR" type="number" placeholder="Euro">
+                </div>
+                <div class="w3-cell w3-center" style="width: 10px">
+                    <b>,</b>
+                </div>
+                <div class="w3-cell">
+                    <input ng-model="unitCostCENT" class="w3-input w3-border" id="unitCostCENT" name="unitCostCENT" type="number" placeholder="Cent">
+                </div>
+
+
+            </div>
+
+
+            <div class="w3-col m1 w3-hide-small">
+                <p></p>
+            </div>
+
+
+            <div class="w3-col m3">
+                <label class="w3-text-black"><b>Rabatt (%)</b></label>
+                <input ng-model="discount" class="w3-input w3-border" id="discount" name="discount" type="number" placeholder="optional"></p>
+            </div>
+
+        </div>
+
+
+
+        <div class="w3-row">
+
+            <div> <label class="w3-text-black"><b>USt. (%)</b></label></div>
+            <div class="w3-col m6">
+                <input ng-model="valueAddedTax" class="w3-radio" type="radio" id="valueAddedTax19" name="valueAddedTax" value="19" checked><label>19% (Normalsatz)</label></p>
+            </div>
+
+            <div class="w3-col m6">
+                <input ng-model="valueAddedTax" class="w3-radio" type="radio" id="valueAddedTax7" name="valueAddedTax7" value="7"><label>7% (Ermäßigter Satz)</label></p>
+            </div>
+
+        </div>
+
+        <div class="w3-center">
+            <button ng-click="addPosition()" class="w3-button w3-circle w3-green w3-margin">+</button>
+        </div>
+
+        <div class="w3-responsive">
+            <table class="w3-table-all ">
+                <tr>
+                    <th>Pos.</th>
+                    <th>Bezeichnung</th>
+                    <th>Rabatt</th>
+                    <th>USt.</th>
+                    <th>Menge</th>
+                    <th>Einzelpreis</th>
+                    <th>Gesamtpreis</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="pos in invoicePositions">
+                    <td>{{$index}}</td>
+                    <td>{{pos.positionDescription}}</td>
+                    <td>{{pos.discount + "%"}}</td>
+                    <td>{{pos.valueAddedTax + "%"}}</td>
+                    <td>{{pos.amount}}</td>
+                    <td>{{pos.unitCost.toFixed(2)}}</td>
+                    <td>{{pos.totalPrice.toFixed(2)}}</td>
+                    <td> <button ng-click="deletePosition($index)" class="w3-button w3-red w3-small w3-padding-small">-</button></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="w3-center w3-margin">
+            <button ng-click="downloadPDF()" class="w3-button w3-block w3-green">Rechnung erstellen</button>
+        </div>
+
+        <div><p></p></div>
+
+    </div>
+
+</div>
+
+
+
+<script src="invoiceApp.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+{ "records":[
+  {"customerCompany":"TaxiTaxi","customerName":"Paul Schweitzer", "customerStreet":"Cusanusstr. 1", "customerZIP":"85049", "customerCity":"Ingolstadt"},
+  {"customerCompany":"Wechselfabrik GbR","customerName":"Die Gesellschafter", "customerStreet":"Sonnenwiese 7", "customerZIP":"84048", "customerCity":"Mainburg"}
+]}

@@ -1,0 +1,22 @@
+\chapter{Einleitung}
+\label{cha:Einleitung}
+
+Das StartUp Kiwilabs, dessen Gründer Sascha Kirstein und Michael Oldenburger sind, benötigt ein Tool zur professionellen Erstellung von Rechnungen und Angeboten. Das Unternehmen möchte in Ingolstadt die lokale StartUp Szene fördern, indem es bestehende StartUps unterstützt oder Ideen zu neuen StartUps formt.
+\\ \\
+Die Anforderungen für das Rechnungstool umfassen dabei
+\begin{itemize}
+\item ein professionelles Angebots- \& Rechnungslayout,
+\item eine einfache Verwendbarkeit,
+\item eine Pflege gestellter Angebote und Rechnungen,
+\item eine Verwaltung von Firmen mit Kontaktpersonen,
+\item eine Ausfüllhilfe bestehender Firmenkontakte,
+\item eine eigenständigen Berechnung der Positionen,
+\item eine Benutzer-Authentifizierung
+\end{itemize}
+ohne einer Notwendigkeit der Anwendungsinstallation bei den Benutzern.
+\\ \\
+Latex bietet für viele der genannten Anforderungen gute Lösungen und eignet sich daher hervorragend als Basis dieses Projekts. Als Benutzerschnittstelle bietet sich eine Webseite an, in der ein autorisierter Benutzer Angebote und Rechnungen einfach erstellen kann. Die dabei erzeugten Daten werden dem Webserver übermittelt, der im Hintergrund die Latex Vorlage derart verändert, dass die gewünschte Rechnung nach dem Kompilieren entsteht und übergibt das fertige \ac{pdf}-Dokument zurück an den Ersteller. Für die Ausfüllhilfe im Frontend liefert der Webserver alle benötigten Daten.
+\\ \\
+Im Umfang dieser Arbeit wurde die Latex-Vorlage erstellt, welche die Grundlage für alle Angebote und Rechnungen bietet. Desweitern wurde das Frontend mit allen Funktionalitäten implementiert. Die Daten der Ausfüllhilfen werden momentan als Mock-Up realisiert, in einer Form, wie sie ein späterer Server ausliefern würde. Die gesamten Angebot- bzw. Rechnungsdaten werden beim Absenden im Frontend als ein Datenobjekt per \ac{http}-GET versendet und sind damit für einen Server empfangbar. 
+\\ \\
+Für Projektinteressierte ist das Ergebnis der Arbeit auf \url{https://github.com/chh1399/RechnungsAppKiwilabs.git} aufrufbar.
